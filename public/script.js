@@ -46,6 +46,7 @@ let soundOn = true;
 let confettiOn = true;
 
 const segmentAngle = 360 / segments.length;
+const START_ANGLE = -90;
 
 function buildLabels() {
   wheelLabels.innerHTML = "";
@@ -60,7 +61,7 @@ function buildLabels() {
     }
     label.textContent = segment.label;
 
-    const angle = index * segmentAngle + segmentAngle / 2;
+    const angle = START_ANGLE + index * segmentAngle + segmentAngle / 2;
     label.style.transform = `rotate(${angle}deg) translateY(-${labelRadius}px) rotate(-${angle}deg)`;
 
     wheelLabels.appendChild(label);
@@ -93,7 +94,7 @@ function spinWheel() {
   pendingIndex = Math.floor(Math.random() * segments.length);
 
   const current = ((currentRotation % 360) + 360) % 360;
-  const targetAngle = pendingIndex * segmentAngle + segmentAngle / 2;
+  const targetAngle = START_ANGLE + pendingIndex * segmentAngle + segmentAngle / 2;
   const desiredEnd = (360 - targetAngle) % 360;
   let delta = desiredEnd - current;
   if (delta < 0) delta += 360;
@@ -112,11 +113,14 @@ wheel.addEventListener("transitionend", () => {
 
   const normalizedRotation = ((currentRotation % 360) + 360) % 360;
   const pointerAngle = (360 - normalizedRotation) % 360;
-  const resultIndex = Math.floor((pointerAngle + segmentAngle / 2) / segmentAngle) % segments.length;
+  const startAngle = (START_ANGLE + 360) % 360;
+  const resultIndex = Math.floor(
+    ((pointerAngle - startAngle + 360 + segmentAngle / 2) % 360) / segmentAngle
+  ) % segments.length;
   const result = segments[resultIndex];
   const relation = relations[Math.floor(Math.random() * relations.length)];
   resultAmount.textContent = result.label;
-  friendName.textContent = `From: ${relation}`;
+  friendName.textContent = relation;
   friendAvatar.textContent = relation.charAt(0).toUpperCase();
   friendDesc.textContent = "Your lucky giver";
 
@@ -179,7 +183,7 @@ modal.addEventListener("click", (event) => {
 });
 
 copyBtn.addEventListener("click", async () => {
-  const text = `${resultAmount.textContent} Salami from ${friendName.textContent.replace("From: ", "")}.`;
+  const text = `${resultAmount.textContent} Salami from ${friendName.textContent}.`;
   try {
     await navigator.clipboard.writeText(text);
     copyBtn.textContent = "Copied!";
