@@ -10,18 +10,15 @@ const segments = [
 ];
 
 const relations = [
+  "Soulmate",
   "Best Friend",
-  "Husband",
-  "Wife",
+  "Situationship Mate",
+  "Lover",
+  "Hater",
   "Mother",
   "Father",
   "Brother",
-  "Sister",
-  "Cousin",
-  "Aunt",
-  "Uncle",
-  "Colleague",
-  "Neighbor"
+  "Sister"
 ];
 
 const wheel = document.getElementById("wheel");
@@ -113,7 +110,10 @@ wheel.addEventListener("transitionend", () => {
   spinBtn.disabled = false;
   spinCenter.classList.remove("active");
 
-  const result = segments[pendingIndex];
+  const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+  const pointerAngle = (360 - normalizedRotation) % 360;
+  const resultIndex = Math.floor((pointerAngle + segmentAngle / 2) / segmentAngle) % segments.length;
+  const result = segments[resultIndex];
   const relation = relations[Math.floor(Math.random() * relations.length)];
   resultAmount.textContent = result.label;
   friendName.textContent = `From: ${relation}`;
