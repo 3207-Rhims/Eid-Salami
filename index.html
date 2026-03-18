@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salami Spinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="decor moon"></div>
+      <div class="decor lantern"></div>
+      <h1>Eid Salami Spinner</h1>
+      <p>Spin to see how much Salami you deserve and from whom!</p>
+    </header>
+
+    <main class="spinner-area">
+      <div class="wheel-wrap">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel">
+          <div class="center-btn" id="spinCenter">Spin Now</div>
+        </div>
+        <div class="wheel-labels" id="wheelLabels"></div>
+      </div>
+
+      <button class="primary-btn" id="spinBtn">Spin Now</button>
+      <div class="controls">
+        <button class="ghost-btn" id="soundToggle">Sound: On</button>
+        <button class="ghost-btn" id="confettiToggle">Confetti: On</button>
+      </div>
+
+      <p class="footer-note">This is just for fun. Made with love for Eid celebrations.</p>
+      <p class="footer-note subtle">Demo only — no Facebook data is accessed.</p>
+    </main>
+  </div>
+
+  <div class="modal" id="resultModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+      <h2 id="resultTitle">Congratulations!</h2>
+      <div class="result-amount" id="resultAmount">৳100</div>
+      <p class="result-sub">Salami!</p>
+      <div class="friend-card">
+        <div class="friend-avatar" id="friendAvatar">Y</div>
+        <div>
+          <div class="friend-name" id="friendName">From: Yusuf Islam</div>
+          <div class="friend-desc">Your top engager</div>
+        </div>
+      </div>
+      <p class="result-message" id="resultMessage">Go remind them. Don't forget to send bKash request!</p>
+      <div class="modal-actions">
+        <a class="facebook-btn" id="shareBtn" href="#" target="_blank" rel="noopener">Share on Facebook</a>
+        <button class="ghost-btn" id="copyBtn">Copy Result</button>
+        <button class="ghost-btn" id="spinAgainBtn">Spin Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
