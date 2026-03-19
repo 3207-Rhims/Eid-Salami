@@ -31,6 +31,47 @@ body {
   padding: 40px 24px 64px;
 }
 
+.promo-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(19, 143, 74, 0.12), rgba(242, 200, 75, 0.2));
+  color: #1f3c2a;
+  font-weight: 600;
+  box-shadow: 0 12px 24px rgba(15, 62, 35, 0.12);
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.promo-tag {
+  background: #138f4a;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.promo-link {
+  color: #0f5b33;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.promo-link:hover {
+  text-decoration: underline;
+}
+
+.promo-note {
+  color: #4a5b54;
+  font-size: 0.9rem;
+}
+
 .hero {
   text-align: center;
   position: relative;
