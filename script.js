@@ -52,7 +52,7 @@ const POINTER_ANGLE = -90;
 function buildLabels() {
   wheelLabels.innerHTML = "";
   const radius = wheel.offsetWidth / 2;
-  const labelRadius = radius * 0.62;
+  const labelRadius = radius * 0.72;
 
   segments.forEach((segment, index) => {
     const label = document.createElement("div");
@@ -63,7 +63,7 @@ function buildLabels() {
     label.textContent = segment.label;
 
     const angle = START_ANGLE + index * segmentAngle + segmentAngle / 2;
-    label.style.transform = `rotate(${angle}deg) translateY(-${labelRadius}px) rotate(-${angle}deg)`;
+    label.style.transform = `rotate(${angle}deg) translateY(-${labelRadius}px) rotate(90deg)`;
 
     wheelLabels.appendChild(label);
   });
