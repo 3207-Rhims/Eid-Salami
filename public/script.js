@@ -9,7 +9,7 @@ const segments = [
   { label: "Try Again", amount: 0 }
 ];
 
-const SITE_URL = "https://elegant-frangipane-0276a0.netlify.app/?v=3";
+const SITE_URL = "https://elegant-frangipane-0276a0.netlify.app/?v=4";
 
 const relations = [
   "Soulmate",
