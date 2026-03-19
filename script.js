@@ -114,7 +114,10 @@ wheel.addEventListener("transitionend", () => {
   spinBtn.disabled = false;
   spinCenter.classList.remove("active");
 
-  const result = segments[pendingIndex];
+  const normalizedRotation = ((currentRotation % 360) + 360) % 360;
+  const pointerRelative = (POINTER_ANGLE - normalizedRotation - START_ANGLE + 3600) % 360;
+  const resultIndex = Math.floor(pointerRelative / segmentAngle) % segments.length;
+  const result = segments[resultIndex];
   const relation = relations[Math.floor(Math.random() * relations.length)];
   resultAmount.textContent = result.label;
   friendName.textContent = relation;
