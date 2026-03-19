@@ -9,6 +9,8 @@ const segments = [
   { label: "Try Again", amount: 0 }
 ];
 
+const SITE_URL = "https://elegant-frangipane-0276a0.netlify.app/";
+
 const relations = [
   "Soulmate",
   "Best Friend",
@@ -127,7 +129,7 @@ wheel.addEventListener("transitionend", () => {
     resultMessage.textContent = "Go remind them. Don't forget to send bKash request!";
     quote = `I just got ${result.label} Salami from my ${relation} on Salami Spinner!`;
   }
-  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(quote)}`;
+  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}&quote=${encodeURIComponent(quote)}`;
   shareBtn.href = shareUrl;
 
   if (confettiOn && result.label !== "Try Again") {
