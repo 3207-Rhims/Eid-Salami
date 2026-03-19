@@ -51,6 +51,34 @@ const segmentAngle = 360 / segments.length;
 const START_ANGLE = -90;
 const POINTER_ANGLE = -90;
 
+function getResultIndexFromLabels() {
+  const labels = Array.from(wheelLabels.querySelectorAll(".wheel-label"));
+  if (!labels.length) {
+    return pendingIndex;
+  }
+  const wheelRect = wheel.getBoundingClientRect();
+  const cx = wheelRect.left + wheelRect.width / 2;
+  const cy = wheelRect.top + wheelRect.height / 2;
+  const pointerAngle = -Math.PI / 2;
+
+  let bestIndex = pendingIndex;
+  let bestDiff = Infinity;
+
+  labels.forEach((label) => {
+    const rect = label.getBoundingClientRect();
+    const lx = rect.left + rect.width / 2;
+    const ly = rect.top + rect.height / 2;
+    const ang = Math.atan2(ly - cy, lx - cx);
+    const diff = Math.abs(Math.atan2(Math.sin(ang - pointerAngle), Math.cos(ang - pointerAngle)));
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIndex = Number(label.dataset.index);
+    }
+  });
+
+  return bestIndex;
+}
+
 function buildLabels() {
   wheelLabels.innerHTML = "";
   const radius = wheel.offsetWidth / 2;
@@ -63,6 +91,7 @@ function buildLabels() {
       label.classList.add("try-again");
     }
     label.textContent = segment.label;
+    label.dataset.index = index;
 
     const angle = START_ANGLE + index * segmentAngle + segmentAngle / 2;
     label.style.transform = `rotate(${angle}deg) translateY(-${labelRadius}px) rotate(90deg)`;
@@ -114,9 +143,7 @@ wheel.addEventListener("transitionend", () => {
   spinBtn.disabled = false;
   spinCenter.classList.remove("active");
 
-  const normalizedRotation = ((currentRotation % 360) + 360) % 360;
-  const pointerRelative = (POINTER_ANGLE - normalizedRotation - START_ANGLE + 3600) % 360;
-  const resultIndex = Math.floor(pointerRelative / segmentAngle) % segments.length;
+  const resultIndex = getResultIndexFromLabels();
   const result = segments[resultIndex];
   const relation = relations[Math.floor(Math.random() * relations.length)];
   resultAmount.textContent = result.label;
